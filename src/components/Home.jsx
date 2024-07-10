@@ -12,8 +12,8 @@ const Home = () => {
           alt="Hero Image"
           className="absolute inset-0 object-cover w-full h-full md:h-full  "
         />
-        <div className="absolute inset-0 flex items-center justify-center lg:justify-start text-white text-center  ">
-          <div className="h-3/6 lg:w-1/2 w-full  px-4 ml-0 pb-6 items-center justify-start flex flex-col ">
+        <div className="absolute inset-0 flex items-center justify-center lg:items-center lg:justify-start text-white text-center  ">
+          <div className="h-3/6 lg:w-1/2 w-full  px-4 ml-0 pb-6 items-center justify-start flex flex-col lg:pt-16 ">
             <h1 className="text-4xl font-bold mb-8">Welcome to Our Website</h1>
             <p className="text-lg mb-8">This is the home page content.</p>
             <a
