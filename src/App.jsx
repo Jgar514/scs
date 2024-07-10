@@ -1,23 +1,30 @@
-import React, { useState, useEffect } from 'react';
+// src/App.jsx
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Nav from './components/Nav';
+import Footer from './components/Footer';
+import Home from './components/Home'; // Create Home component if not already done
+import About from './components/About';
+import Services from './components/Services';
+import Contact from './components/Contact';
 
-    function App() {
-      const [dateTime, setDateTime] = useState(new Date());
+const App = () => {
+  return (
+    <Router>
+      <div>
+        <Nav />
+        <main className="flex-1 pt-10">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </Router>
+  );
+};
 
-      useEffect(() => {
-        const timer = setInterval(() => {
-          setDateTime(new Date());
-        }, 1000);
-        return () => clearInterval(timer);
-      }, []);
-
-      return (
-        <div className='w-screen h-screen bg-blue-300 flex flex-col justify-center items-center'>
-          <div className='text-yellow-200 text-4xl mb-4'>Hello World</div>
-          <div className='text-yellow-200 text-2xl'>
-            {dateTime.toLocaleDateString()} {dateTime.toLocaleTimeString()}
-          </div>
-        </div>
-      );
-    }
-
-    export default App;
+export default App;
