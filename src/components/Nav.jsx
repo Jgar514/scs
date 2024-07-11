@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { HiMenu, HiX } from 'react-icons/hi'; // Import hamburger and close icons from React Icons
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -13,18 +14,37 @@ const Nav = () => {
     setIsOpen(false);
   };
 
+  // Calculate the height of the navigation bar
+  const navHeight = 64; // Replace with your actual navigation bar height
+
+  // Scroll to top on route change, accounting for navigation bar height
+  useEffect(() => {
+    const scrollWithOffset = () => {
+      const yOffset = -navHeight;
+      const element = document.getElementById(location.hash.replace('#', ''));
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    };
+
+    if (location.hash) {
+      scrollWithOffset();
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [location.pathname, location.hash, navHeight]);
+
   return (
-    <nav className="bg-[#0099B0] text-white py-4 fixed w-full z-10 top-0  px-0">
+    <nav className="bg-[#0099B0] text-white py-4 fixed w-full z-10 top-0 px-0">
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 relative">
         <div className="flex items-center justify-between h-16">
           {/* Logo on the left */}
           <div className="flex-shrink-0 pl-2">
-
             <Link to="/" className="text-white text-md md:text-lg font-bold">
               <div className='flex flex-row gap-2 md:gap-4 h-full'>
-                <div className='text-yellow-400   border-2 p-2 border-yellow-400 rounded-full'>Logo
-                </div>
-                <div className=' flex items-center'>Shore Community Services</div></div></Link>
+                <div className='text-yellow-400 border-2 p-2 border-yellow-400 rounded-full'>Logo</div>
+                <div className=' flex items-center'>Shore Community Services</div>
+              </div>
+            </Link>
           </div>
 
           {/* Desktop menu */}
@@ -41,7 +61,7 @@ const Nav = () => {
           <div className="absolute inset-y-0 right-4 flex items-center pr-2 sm:hidden">
             <button
               type="button"
-              className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-white md:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white "
+              className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-white md:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
               onClick={toggleMenu}
             >
               {isOpen ? <HiX className="h-8 w-8" /> : <HiMenu className="h-8 w-8" />}

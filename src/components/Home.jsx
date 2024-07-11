@@ -1,6 +1,8 @@
 // src/components/Home.jsx
 import React from 'react';
-import heroImage from '../assets/hero.png'; // Import the hero.png image
+import heroImage from '../assets/hero.png';
+import ContactForm from './ContactForm';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
@@ -16,12 +18,12 @@ const Home = () => {
           <div className="h-3/6 lg:w-1/2 w-full  px-4 ml-0 pb-6 items-center justify-start flex flex-col lg:pt-16 ">
             <h1 className="text-4xl font-bold mb-8">Welcome to Our Website</h1>
             <p className="text-lg mb-8">This is the home page content.</p>
-            <a
-              href="#services"
+            <Link
+              to="/services"
               className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300"
             >
               Learn More
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -59,6 +61,8 @@ const Home = () => {
       </div>
 
       {/* Other sections */}
+      <ContactForm />
+
       {/* Add more sections as needed */}
     </div>
   );
